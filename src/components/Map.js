@@ -18,7 +18,7 @@ const Map = ({ cities, onCitySelected }) => {
     };
     return (
         <div>
-            <MapContainer center={[51.505, 10.09]} zoom={4} style={{ height: "100vh", width: "100vw" }}>
+            <MapContainer center={[51.505, 10.09]} zoom={4} style={{ height: "100vh", width: "100%" }}>
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'

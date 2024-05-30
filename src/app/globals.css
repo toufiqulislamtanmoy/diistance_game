@@ -2,3 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+
+summary {list-style: none}
+summary::-webkit-details-marker {display: none; }
+
+details summary::after { 
+    content:"🡒"; 
+    color: black; 
+    font-size: larger;
+    margin-left: 10px;
+  }
+  
+  
+  details[open] summary::after { 
+    content:"🡑"; 
+    color: black ;
+    font-size: larger;
+    margin-left: 10px;
+  }
+
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      height: 0;
+    }
+    100% {
+      opacity: 1;
+      height: var(--details-height-open, '100%');
+    }
+  }
+  
+  html {
+    --details-transition-time: 400ms;
+  }
+  
+  details {
+    transition: all ease-out var(--details-transition-time, 0);
+    max-height: var(--details-height-closed, auto);
+  }
+  
+  details[open] {
+    max-height: var(--details-height-open, auto);
+  
+  }
+  
+  details div {
+    transition: all ease-out var(--details-transition-time, 0);
+    max-height: var(--details-content-height-closed, auto);
+    overflow: hidden;
+    animation-name: slideDown;
+    animation-duration: var(--details-transition-time);
+  }
+  
+  details.is--open div {
+    max-height: var(--details-content-height-open, auto);
+  }
