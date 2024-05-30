@@ -1,11 +1,12 @@
 "use client"
-import Map from "@/components/Map";
 import cities from "@/data/cities";
 import { calculateDistance } from "@/utils/distance";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { GiPathDistance } from "react-icons/gi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+const Map = dynamic(() => import('@/components/Map'), { ssr: false });
 
 export default function Home() {
   const [score, setScore] = useState(1500);
@@ -29,7 +30,6 @@ export default function Home() {
     setRound(round + 1);
     if (distance <= 50) {
       toast.success(`Greet🎊! You were within ${distance.toFixed(2)} km of ${currentCity.name}`)
-      setMessage();
       setHighScore(highScore + 1);
     } else {
       toast.error(`You were ${distance.toFixed(2)} km away from ${currentCity.name}`)

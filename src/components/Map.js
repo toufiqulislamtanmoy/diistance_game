@@ -1,12 +1,12 @@
 "use client"
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 
 const Map = ({ correctLocation, onCitySelected }) => {
     const [selectedPosition, setSelectedPosition] = useState(null);
-
+    
     const customIcon = new Icon({
         iconUrl:'pin.png',
         iconSize:[38,38]
