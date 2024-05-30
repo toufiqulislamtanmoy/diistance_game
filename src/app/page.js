@@ -10,14 +10,14 @@ import Swal from "sweetalert2";
 export default function Home() {
   const [score, setScore] = useState(1500);
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
-  const [message, setMessage] = useState('');
   const [highScore, setHighScore] = useState(0);
   const [round, setRound] = useState(1);
+  const [correctLocation,setCorrectLocation] = useState(null);
   console.log(cities)
 
   const handleCitySelected = (selectedPosition) => {
 
-    setRound(round + 1);
+    
     const currentCity = cities[currentCityIndex];
     const distance = calculateDistance(
       selectedPosition.lat,
@@ -25,7 +25,8 @@ export default function Home() {
       currentCity.position.lat,
       currentCity.position.lng
     );
-
+    setCorrectLocation(currentCity?.position);
+    setRound(round + 1);
     if (distance <= 50) {
       toast.success(`Greet🎊! You were within ${distance.toFixed(2)} km of ${currentCity.name}`)
       setMessage();
@@ -73,7 +74,7 @@ export default function Home() {
     setRound(1)
     setCurrentCityIndex(0);
     setHighScore(0);
-    setMessage('');
+    setCorrectLocation(null);
   };
   return (
     <>
@@ -102,7 +103,7 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full lg:w-2/3">
-          <Map cities={cities} onCitySelected={handleCitySelected} />
+          <Map cities={cities} round={round} onCitySelected={handleCitySelected} correctLocation={correctLocation}/>
         </div>
       </div>
     </>

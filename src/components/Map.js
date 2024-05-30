@@ -1,15 +1,25 @@
 "use client"
+import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css'
 import { useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 
-const Map = ({ cities, onCitySelected }) => {
+const Map = ({ correctLocation, onCitySelected }) => {
     const [selectedPosition, setSelectedPosition] = useState(null);
+
+    const customIcon = new Icon({
+        iconUrl:'pin.png',
+        iconSize:[38,38]
+    })
+    const correctLocationIcon = new Icon({
+        iconUrl:'cor.png',
+        iconSize:[38,38]
+    })
 
     const MapClickHandler = () => {
         useMapEvents({
             click(e) {
-                setSelectedPosition(e.latlng);
+                setSelectedPosition(e.latlng); //this is the selected city by the user clicking
                 onCitySelected(e.latlng);
             },
         });
@@ -25,7 +35,12 @@ const Map = ({ cities, onCitySelected }) => {
                 />
                 <MapClickHandler />
                 {selectedPosition && (
-                    <Marker position={selectedPosition}>
+                    <Marker position={selectedPosition} icon={customIcon}>
+                        <Popup>You clicked here: {selectedPosition.lat.toFixed(2)}, {selectedPosition.lng.toFixed(2)}</Popup>
+                    </Marker>
+                )}
+                {correctLocation && (
+                    <Marker position={correctLocation} icon={correctLocationIcon}>
                         <Popup>You clicked here: {selectedPosition.lat.toFixed(2)}, {selectedPosition.lng.toFixed(2)}</Popup>
                     </Marker>
                 )}
