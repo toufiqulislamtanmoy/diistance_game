@@ -1,10 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# City Guessing Game
+
+## Overview
+
+The City Guessing Game is an interactive map-based game where users guess the location of cities around the Europe. Players click on the map to find the city given in each round. The goal is to achieve the highest score by guessing as close as possible to the actual city locations.
+
+## Features
+
+- Interactive map with click events
+- Dynamic score calculation based on distance from the correct location
+- Animated feedback for game events (e.g., game over, after guessing the location)
+- Real-time score updates
+- Display of correct and user-guessed locations on the map using Marker.
+
+## Setup and Installation
+
+### Prerequisites
+
+- Node.js (v20.x or later recommended)
+- npm (v10.x or later) or yarn (v1.x or later)
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+First, clone the project:
 
 ```bash
+git clone https://github.com/toufiqulislamtanmoy/diistance_game.git
+
+```
+
+Install the dependencies:
+
+```
+npm install
+```
+
+Run the development server:
+
+```
 npm run dev
 # or
 yarn dev
@@ -16,21 +51,8 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Demo in Live
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+For live demo visit ->  [city-gussening-game](https://citygueesinggame-mhjr6b1mz-toufiqulislamtanmoys-projects.vercel.app) 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# [Note:] If there are any issues with the live link, please check the project locally.
