@@ -6,15 +6,18 @@ import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'r
 
 const Map = ({ correctLocation, onCitySelected }) => {
     const [selectedPosition, setSelectedPosition] = useState(null);
+    // icon for player guessing location
     const customIcon = new Icon({
         iconUrl:'pin.png',
         iconSize:[38,38]
     })
+    // icon for correct location
     const correctLocationIcon = new Icon({
         iconUrl:'cor.png',
         iconSize:[38,38]
     })
 
+    // handel click event in the map and process it 
     const MapClickHandler = () => {
         useMapEvents({
             click(e) {

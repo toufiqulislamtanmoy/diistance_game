@@ -18,6 +18,7 @@ export default function Home() {
   const [correctLocation, setCorrectLocation] = useState(null);
   const [rules, setRules] = useState(null);
 
+  // Get all the rules from my local json data
   useEffect(() => {
     fetch('/rule.json')
       .then(res => {
@@ -29,22 +30,26 @@ export default function Home() {
       .then(data => setRules(data))
       .catch(error => console.error('There was a problem with the fetch operation:', error));
   }, []);
-  console.log(rules);
 
 
-
+  // Select city by the user
   const handleCitySelected = (selectedPosition) => {
-
-
     const currentCity = cities[currentCityIndex];
+    //call the distance method with pass all the necessary parameter
     const distance = calculateDistance(
       selectedPosition.lat,
       selectedPosition.lng,
       currentCity.position.lat,
       currentCity.position.lng
     );
-    setCorrectLocation(currentCity?.position);
+    setCorrectLocation(currentCity?.position); //set the correct location for display to the user
     setRound(round + 1);
+
+    /*
+     * logic for checking the guessing distance 
+     * and based on show the message 
+     * updating correct guess
+     */
     if (distance <= 50) {
       toast.success(`Greet🎊! You were within ${distance.toFixed(2)} km of ${currentCity.name}`)
       setHighScore(highScore + 1);
@@ -54,6 +59,10 @@ export default function Home() {
 
     setScore(score - distance);
     setCurrentCityIndex(currentCityIndex + 1);
+
+    /**
+     * this is the logic for checking game over or not
+     */
 
     if (score - distance <= 0 || currentCityIndex + 1 >= cities.length) {
 
@@ -79,13 +88,14 @@ export default function Home() {
         }
       }).then((result) => {
         if (result.isConfirmed) {
-          resetGame();
+          resetGame(); //call the resetGame() method for reset all the data
         }
       });
 
     }
   };
 
+  // reset method
   const resetGame = () => {
     setScore(1500);
     setRound(1)
@@ -120,6 +130,7 @@ export default function Home() {
 
 
       <div className="flex flex-col lg:flex-row-reverse font-Poppins">
+        {/*  Instructions panel of the game start*/}
         <div className="lg:w-1/3 w-full p-5 shadow-xl bg-rose-200  max-h-[50vh] md:max-h-screen lg:max-h-screen overflow-y-scroll">
           <div className="flex items-center justify-center gap-1">
             <h1 className="text-center text-2xl font-Kaushan font-semibold">City Guessing Game
@@ -147,9 +158,13 @@ export default function Home() {
             }
           </div>
         </div>
+        {/*  Instructions panel of the game end*/}
+
+        {/*  Map interface of the game start*/}
         <div className="w-full lg:w-2/3">
           <Map cities={cities} round={round} onCitySelected={handleCitySelected} correctLocation={correctLocation} />
         </div>
+        {/*  Map interface of the game start*/}
       </div>
     </>
   );
