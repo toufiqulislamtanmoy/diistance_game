@@ -1,0 +1,33 @@
+
+ [
+      {
+        "title": "Starting the Game",
+        "description": "The game begins with a score of 1500 kilometers. A city name is displayed for each round."
+      },
+      {
+        "title": "Guessing a Location",
+        "description": "Click on the map to place a marker at your guessed location for the displayed city. You can only place one marker per round."
+      },
+      {
+        "title": "Scoring",
+        "description": "After placing your marker, the game calculates the distance between your guessed location and the actual city location. If your guess is within 50 kilometers of the actual city, it is considered correct. Your score is reduced by the distance (in kilometers) between your guess and the correct location."
+      },
+      {
+        "title": "Feedback",
+        "description": "The correct city location and your guessed location are both displayed on the map. A message will inform you of the distance between your guess and the correct location. If your guess is correct (within 50 kilometers), you will receive a success notification."
+      },
+      {
+        "title": "Rounds",
+        "description": "The game proceeds in rounds, with each round featuring a new city to guess. The current round number is displayed in the instructions panel."
+      },
+      {
+        "title": "Game Over",
+        "description": "The game ends when your score reaches zero kilometers. The game also ends if you have guessed the locations for all cities in the list. A popup will display your high score and give you the option to restart the game."
+      },
+      {
+        "title": "High Score",
+        "description": "Your high score is the total number of cities you correctly guessed during the game. The high score is displayed at the end of the game."
+      }
+    ]
+  
+  

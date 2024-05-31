@@ -2,10 +2,12 @@
 import cities from "@/data/cities";
 import { calculateDistance } from "@/utils/distance";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiPathDistance } from "react-icons/gi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { FaRegCircleQuestion } from "react-icons/fa6";
+import { rule } from "postcss";
 const Map = dynamic(() => import('@/components/Map'), { ssr: false });
 
 export default function Home() {
@@ -13,12 +15,27 @@ export default function Home() {
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [round, setRound] = useState(1);
-  const [correctLocation,setCorrectLocation] = useState(null);
-  console.log(cities)
+  const [correctLocation, setCorrectLocation] = useState(null);
+  const [rules, setRules] = useState(null);
+
+  useEffect(() => {
+    fetch('/rule.json')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => setRules(data))
+      .catch(error => console.error('There was a problem with the fetch operation:', error));
+  }, []);
+  console.log(rules);
+
+
 
   const handleCitySelected = (selectedPosition) => {
 
-    
+
     const currentCity = cities[currentCityIndex];
     const distance = calculateDistance(
       selectedPosition.lat,
@@ -78,9 +95,37 @@ export default function Home() {
   };
   return (
     <>
+      {/* Modal Content */}
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box w-11/12 max-w-5xl">
+          <h3 className="font-bold text-lg">Rules</h3>
+          <ul className="px-5 ">
+            {rules &&
+              rules?.map((rule, index) => {
+                return (
+                  <>
+                    <li className="list-decimal text-2xl font-bold my-2" key={index}> {rule?.title}</li>
+                    <p>{rule?.description}</p>
+                  </>
+                )
+              })
+            }
+          </ul>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+      {/* Modal Content End */}
+
+
       <div className="flex flex-col lg:flex-row-reverse font-Poppins">
         <div className="lg:w-1/3 w-full p-5 shadow-xl bg-rose-200  max-h-[50vh] md:max-h-screen lg:max-h-screen overflow-y-scroll">
-          <h1 className="text-center text-2xl font-Kaushan font-semibold">City Guessing Game</h1>
+          <div className="flex items-center justify-center gap-1">
+            <h1 className="text-center text-2xl font-Kaushan font-semibold">City Guessing Game
+            </h1>
+            <button onClick={() => document.getElementById('my_modal_2').showModal()}><FaRegCircleQuestion /></button>
+          </div>
           <div className="w-full bg-white h-[2px] my-2"></div>
           <div className="flex lg:flex-row flex-col justify-between items-center">
             <p className="flex items-center text-2xl gap-1">
@@ -103,7 +148,7 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full lg:w-2/3">
-          <Map cities={cities} round={round} onCitySelected={handleCitySelected} correctLocation={correctLocation}/>
+          <Map cities={cities} round={round} onCitySelected={handleCitySelected} correctLocation={correctLocation} />
         </div>
       </div>
     </>

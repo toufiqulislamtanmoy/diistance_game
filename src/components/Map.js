@@ -1,12 +1,11 @@
 "use client"
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css'
-import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import {  useState } from 'react';
+import { MapContainer, Marker, Polygon, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 
 const Map = ({ correctLocation, onCitySelected }) => {
     const [selectedPosition, setSelectedPosition] = useState(null);
-    
     const customIcon = new Icon({
         iconUrl:'pin.png',
         iconSize:[38,38]
@@ -28,11 +27,12 @@ const Map = ({ correctLocation, onCitySelected }) => {
     };
     return (
         <div>
-            <MapContainer center={[51.505, 10.09]} zoom={4} style={{ height: "100vh", width: "100%" }}>
+            <MapContainer center={[54.5260, 15.2551]} zoom={4} style={{ height: "100vh", width: "100%" }}>
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
+                
                 <MapClickHandler />
                 {selectedPosition && (
                     <Marker position={selectedPosition} icon={customIcon}>
